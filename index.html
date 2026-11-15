@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riddhi Properties Pune | Buy, Rent, Commercial &amp; Land Portal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Noto Sans Devanagari -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans Devanagari', 'sans-serif'],
+                    },
+                    colors: {
+                        acresBlue: '#005CA8',
+                        acresDark: '#003A6B',
+                        acresBg: '#F4F7FA',
+                        verifiedGreen: '#059669',
+                        whatsapp: '#25D366',
+                        whatsappDark: '#128C7E'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body {
+            background-color: #F4F7FA;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .acres-hero {
+            background: linear-gradient(135deg, #003A6B 0%, #005CA8 68%, #0284C7 100%);
+        }
+        @keyframes pulseDot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.35); opacity: 0.7; }
+        }
+        .online-pulse {
+            animation: pulseDot 1.8s infinite ease-in-out;
+        }
+        @keyframes slideDownSms {
+            0% { transform: translateY(-100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .sms-banner-anim {
+            animation: slideDownSms 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased pb-20 md:pb-10">
+
+    <!-- ==================== SIMULATED PHONE SMS NOTIFICATION BANNER ==================== -->
+    <div id="smsNotificationBanner" class="fixed top-3 left-3 right-3 sm:left-auto sm:right-4 sm:w-96 z-50 hidden bg-slate-900/95 backdrop-blur-md text-white rounded-2xl shadow-2xl border border-slate-700 p-3.5 sms-banner-anim">
+        <div class="flex items-start justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 flex items-center justify-center shrink-0">
+                    <i data-lucide="message-square-text" class="w-4 h-4"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-400">SMS &#8226; VM-RIDDHI</span>
+                        <span class="text-[10px] text-slate-400">now</span>
+                    </div>
+                    <p id="smsTargetNumberDisplay" class="text-[11px] text-slate-300 font-semibold"></p>
+                </div>
+            </div>
+            <button onclick="document.getElementById('smsNotificationBanner').classList.add('hidden')" class="text-slate-400 hover:text-white p-1">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+        </div>
+        <div class="mt-2 bg-slate-800/90 border border-slate-700 rounded-xl p-2.5 text-xs leading-relaxed">
+            Your Riddhi Properties security verification OTP is <span id="smsOtpCodeHighlight" class="font-mono text-sm font-black text-amber-400 tracking-widest bg-slate-950 px-2 py-0.5 rounded">000000</span>. Valid for 60 seconds. Do not share this code.
+        </div>
+        <div class="mt-2 flex items-center justify-between text-[11px]">
+            <span class="text-slate-400">Tap to auto-fill OTP into form:</span>
+            <button type="button" onclick="autoFillOtpFromSms()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-2.5 py-1 rounded-lg">
+                Auto-Fill OTP
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== 1. TOP 99acres-STYLE PORTAL HEADER ==================== -->
+    <header class="sticky top-0 z-40 bg-acresDark text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 flex items-center justify-between gap-2">
+            <!-- Brand Identity -->
+            <div onclick="switchView('PORTAL')" class="flex items-center gap-2.5 cursor-pointer">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white text-acresBlue flex items-center justify-center font-black text-lg sm:text-xl shadow-sm shrink-0">
+                    RP
+                </div>
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-base sm:text-xl font-extrabold tracking-tight leading-none">Riddhi Properties</span>
+                        <span class="hidden sm:inline-flex items-center gap-0.5 text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2 py-0.5 rounded-full">
+                            <i data-lucide="badge-check" class="w-3 h-3"></i> Pune
+                        </span>
+                    </div>
+                    <p data-i18n="brandSub" class="text-[11px] text-blue-200 mt-0.5">Flats &#8226; Showrooms &#8226; Commercial &#8226; Land</p>
+                </div>
+            </div>
+
+            <!-- Right Controls: 3-Language Switcher + Post Property + Staff Login -->
+            <div class="flex items-center gap-1.5 sm:gap-2.5">
+                <!-- 3-Language Toggle: EN | हिं | मराठी (HTML Entity Safe) -->
+                <div class="flex items-center bg-slate-900/90 border border-white/15 rounded-xl p-0.5 text-[11px] font-bold">
+                    <button onclick="setLanguage('en')" id="lang-en" class="lang-btn px-2 py-1 rounded-lg transition">EN</button>
+                    <button onclick="setLanguage('hi')" id="lang-hi" class="lang-btn px-2 py-1 rounded-lg transition">&#2361;&#2367;&#2306;</button>
+                    <button onclick="setLanguage('mr')" id="lang-mr" class="lang-btn px-2 py-1 rounded-lg transition">&#2350;&#2352;&#2366;&#2336;&#2368;</button>
+                </div>
+
+                <!-- PUBLIC + Add Property / Upload CTA (NO LOGIN REQUIRED) -->
+                <button onclick="openPostModal()" class="inline-flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs px-3 sm:px-4 py-2 rounded-xl shadow-md transition">
+                    <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                    <span data-i18n="postPropBtn">+ Add Property / Upload</span>
+                    <span class="hidden md:inline-block bg-slate-950/15 text-slate-950 text-[9px] font-black px-1.5 py-0.5 rounded">FREE</span>
+                </button>
+
+                <!-- Discreet Internal Team CRM Login Button -->
+                <button onclick="handleStaffHeaderClick()" class="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/20 border border-white/15 text-white text-xs font-semibold px-2.5 sm:px-3 py-2 rounded-xl transition">
+                    <i data-lucide="briefcase" class="w-3.5 h-3.5 text-blue-200"></i>
+                    <span id="headerStaffLabel" data-i18n="staffLoginBtn">Team CRM</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== 2. OFFICE CONTACT STRIP (IMMEDIATELY BELOW HEADER) ==================== -->
+        <div class="bg-[#00284B] border-t border-white/10 px-3 sm:px-6 py-2">
+            <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-[11px] sm:text-xs">
+                <div class="flex items-center gap-1.5 text-blue-100 font-medium">
+                    <i data-lucide="building-2" class="w-3.5 h-3.5 text-amber-400 shrink-0"></i>
+                    <span data-i18n="officeStripText">Riddhi Properties Office Desk &#8212; Call or WhatsApp Directly:</span>
+                </div>
+                <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                    <!-- Number 1: 7020548908 -->
+                    <div class="inline-flex items-center bg-white/10 rounded-lg overflow-hidden border border-white/10">
+                        <a href="tel:7020548908" class="px-2 py-1 hover:bg-white/15 text-white font-bold flex items-center gap-1">
+                            <i data-lucide="phone" class="w-3 h-3 text-emerald-400"></i> 7020548908
+                        </a>
+                        <a href="https://wa.me/917020548908?text=Hello%20Riddhi%20Properties,%20I%20am%20interested%20in%20a%20property." target="_blank" class="px-1.5 py-1 bg-emerald-600/80 hover:bg-emerald-500 text-white" title="WhatsApp 7020548908">
+                            <i data-lucide="message-circle" class="w-3 h-3"></i>
+                        </a>
+                    </div>
+                    <!-- Number 2: 8788355802 -->
+                    <div class="inline-flex items-center bg-white/10 rounded-lg overflow-hidden border border-white/10">
+                        <a href="tel:8788355802" class="px-2 py-1 hover:bg-white/15 text-white font-bold flex items-center gap-1">
+                            <i data-lucide="phone" class="w-3 h-3 text-emerald-400"></i> 8788355802
+                        </a>
+                        <a href="https://wa.me/918788355802?text=Hello%20Riddhi%20Properties,%20I%20am%20interested%20in%20a%20property." target="_blank" class="px-1.5 py-1 bg-emerald-600/80 hover:bg-emerald-500 text-white" title="WhatsApp 8788355802">
+                            <i data-lucide="message-circle" class="w-3 h-3"></i>
+                        </a>
+                    </div>
+                    <!-- Number 3: 8530693830 -->
+                    <div class="inline-flex items-center bg-white/10 rounded-lg overflow-hidden border border-white/10">
+                        <a href="tel:8530693830" class="px-2 py-1 hover:bg-white/15 text-white font-bold flex items-center gap-1">
+                            <i data-lucide="phone" class="w-3 h-3 text-emerald-400"></i> 8530693830
+                        </a>
+                        <a href="https://wa.me/918530693830?text=Hello%20Riddhi%20Properties,%20I%20am%20interested%20in%20a%20property." target="_blank" class="px-1.5 py-1 bg-emerald-600/80 hover:bg-emerald-500 text-white" title="WhatsApp 8530693830">
+                            <i data-lucide="message-circle" class="w-3 h-3"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== 3. LOGGED-IN STAFF WORKSPACE BAR ==================== -->
+        <div id="workspaceNavbar" class="hidden bg-slate-900 border-t border-slate-700 px-3 sm:px-6 py-2">
+            <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+                <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                    <button onclick="switchView('PORTAL')" id="ws-PORTAL" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-acresBlue text-white flex items-center gap-1.5">
+                        <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+                        <span data-i18n="wsPortal">Property Portal</span>
+                    </button>
+                    <button onclick="switchView('CRM')" id="ws-CRM" class="text-xs font-bold px-3 py-1.5 rounded-lg text-slate-300 hover:bg-slate-800 flex items-center gap-1.5">
+                        <i data-lucide="users" class="w-3.5 h-3.5 text-amber-400"></i>
+                        <span data-i18n="wsLeads">Leads &amp; Follow-Ups</span>
+                        <span id="crmCounterBadge" class="bg-red-500 text-white text-[10px] px-1.5 rounded-full font-extrabold">0</span>
+                    </button>
+                    <!-- Team & Owner View Audit Tab (Partners & Master Admin) -->
+                    <button onclick="switchView('TEAM_AUDIT')" id="ws-TEAM_AUDIT" class="hidden text-xs font-bold px-3 py-1.5 rounded-lg text-slate-300 hover:bg-slate-800 flex items-center gap-1.5">
+                        <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-400"></i>
+                        <span>Team &amp; Owner Logs</span>
+                    </button>
+                    <!-- Account & Password Settings with Mobile OTP Tab (Akshay, Aditya & Admin) -->
+                    <button onclick="switchView('ACCOUNT_SETTINGS')" id="ws-ACCOUNT_SETTINGS" class="hidden text-xs font-bold px-3 py-1.5 rounded-lg text-slate-300 hover:bg-slate-800 flex items-center gap-1.5">
+                        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-sky-400"></i>
+                        <span>Account &amp; Password (OTP)</span>
+                    </button>
+                    <!-- Live Cloud Sync Status & Settings Button -->
+                    <button onclick="openCloudSyncModal()" id="ws-CLOUD_SYNC" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5">
+                        <span id="cloudSyncDot" class="w-2 h-2 rounded-full bg-emerald-400 online-pulse"></span>
+                        <span id="cloudSyncLabel">Live Sync ON</span>
+                    </button>
+                    <button onclick="openPostModal()" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white flex items-center gap-1">
+                        <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                        <span data-i18n="wsPost">+ Add Property / Upload</span>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <span id="sessionRoleTag" class="text-[11px] font-semibold text-blue-200 bg-slate-800 border border-slate-700 px-2.5 py-1 rounded-lg"></span>
+                    <button onclick="logoutUser()" class="text-[11px] font-bold text-red-300 hover:text-white bg-red-950/60 border border-red-800/50 px-2.5 py-1 rounded-lg" data-i18n="logoutText">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Toast Message Box -->
+    <div id="toastBox" class="fixed bottom-20 md:bottom-6 right-4 z-50 hidden bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl border border-slate-700 text-xs sm:text-sm font-semibold flex items-center gap-2">
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+        <span id="toastText">Done</span>
+    </div>
+
+    <!-- ==================== VIEW A: PUBLIC CLIENT PROPERTY PORTAL (NO LOGIN REQUIRED) ==================== -->
+    <main id="view-PORTAL">
+        <!-- 99acres Hero Search Banner -->
+        <section class="acres-hero text-white pt-5 pb-10 px-3 sm:px-6">
+            <div class="max-w-6xl mx-auto">
+                <h1 data-i18n="heroHeadline" class="text-lg sm:text-2xl md:text-3xl font-extrabold text-center tracking-tight">
+                    Properties to Buy, Rent &amp; Lease in Pune &#8212; Riddhi Properties
+                </h1>
+                <p data-i18n="heroSubheadline" class="text-xs sm:text-sm text-blue-100 text-center mt-1">
+                    Browse Verified Flats, Showrooms, Shops, Commercial Spaces &amp; Clear-Title Land Deals
+                </p>
+
+                <!-- 99acres Interactive Search Box -->
+                <div class="mt-5 bg-white text-slate-800 rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+                    <!-- Category Tabs -->
+                    <div class="flex items-center border-b border-slate-200 overflow-x-auto no-scrollbar bg-slate-50">
+                        <button onclick="setCategoryTab('ALL')" id="catTab-ALL" class="cat-tab px-4 sm:px-5 py-3 text-xs sm:text-sm font-extrabold border-b-2 border-acresBlue text-acresBlue whitespace-nowrap" data-i18n="catAll">
+                            All Properties
+                        </button>
+                        <button onclick="setCategoryTab('Flat Sale')" id="catTab-Flat Sale" class="cat-tab px-4 sm:px-5 py-3 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap" data-i18n="catFlatSale">
+                            Flat Sale
+                        </button>
+                        <button onclick="setCategoryTab('Flat Rent')" id="catTab-Flat Rent" class="cat-tab px-4 sm:px-5 py-3 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap" data-i18n="catFlatRent">
+                            Flat Rent
+                        </button>
+                        <button onclick="setCategoryTab('Showroom/Shop Rent')" id="catTab-Showroom/Shop Rent" class="cat-tab px-4 sm:px-5 py-3 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap" data-i18n="catShowroom">
+                            Showroom / Shop Rent
+                        </button>
+                        <button onclick="setCategoryTab('Commercial Sale')" id="catTab-Commercial Sale" class="cat-tab px-4 sm:px-5 py-3 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap" data-i18n="catCommercial">
+                            Commercial Sale
+                        </button>
+                        <button onclick="setCategoryTab('Land Sale')" id="catTab-Land Sale" class="cat-tab px-4 sm:px-5 py-3 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap" data-i18n="catLandSale">
+                            Land Sale
+                        </button>
+                        <button onclick="setCategoryTab('Land Rent/Lease')" id="catTab-Land Rent/Lease" class="cat-tab px-4 sm:px-5 py-3 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap" data-i18n="catLandRent">
+                            Land Rent / Lease
+                        </button>
+                    </div>
+
+                    <!-- Search Inputs Grid with Exact Rent (&#8377;1,000 to &#8377;10 Lakh) & Buy (&#8377;10 Lakh to &#8377;50 Cr) Dropdowns -->
+                    <div class="p-3 sm:p-4 grid grid-cols-1 md:grid-cols-12 gap-2.5 items-center">
+                        <!-- Custom Locality / Keyword Search -->
+                        <div class="md:col-span-4 relative">
+                            <i data-lucide="map-pin" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-acresBlue"></i>
+                            <input type="text" id="searchLocalityInput" oninput="renderProperties()" data-i18n-placeholder="localityPlaceholder" placeholder="Locality (Viman Nagar, Kharadi, Koregaon Park...)" class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-medium focus:outline-none focus:border-acresBlue">
+                        </div>
+
+                        <!-- Rent Budget Dropdown (&#8377;1,000 up to &#8377;10 Lakh) -->
+                        <div class="md:col-span-3">
+                            <select id="filterRentBudget" onchange="onBudgetFilterChange('RENT')" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-bold text-slate-700 focus:outline-none focus:border-acresBlue">
